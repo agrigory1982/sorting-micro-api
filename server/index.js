@@ -33,12 +33,14 @@ function createServer(config, logger) {
     // Setup router
     require('../routes')(app);
 
-    // Swagger setup
-    try {
-      const swaggerDocument = YAML.load(__dirname + '/../api/swagger/' + config.swagger);
-      app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-    } catch (err) {
-      reject(err);
+    // Swagger setup for non-prod
+    if (process.env.NODE_ENV !== 'production') {
+      try {
+        const swaggerDocument = YAML.load(__dirname + '/../api/swagger/' + config.swagger);
+        app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+      } catch (err) {
+        reject(err);
+      }
     }
 
     resolve(app);

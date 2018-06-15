@@ -65,8 +65,21 @@ Bubble sort is slower than the other O(n2) sorts; it's about four times as slow 
 - All the components (controllers, services, libs) have their own validation of input data
 - Decoupling controllers from libs via services we enforce a common interface, and make a replacement/upgrade of the lib very smooth, if necessary and not affecting other code
 
+## Development
+``npm run dev``
+
+It will start server with Swagger-UI support and server live-reload on files change
+
 ## Test
 ```npm test```
+
+## Production
+
+``npm run prod``
+
+It will run webpack with production config and create `build/api.prod.js`
+
+Make sure webpack is available.
 
 ## License
 MIT
