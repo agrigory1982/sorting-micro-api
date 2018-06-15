@@ -1,0 +1,102 @@
+swagger: '2.0'
+info:
+  description: Sorting API implementing merge sort and bubble sort strategies
+  version: 0.0.1
+  title: Swagger for Sorting API implementing merge sort and bubble sort strategies
+  termsOfService: http://www.apache.org/licenses/LICENSE-2.0.html
+  contact:
+    email: agrigoryan1982@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: 'localhost:8080'
+basePath: /api/v2
+tags:
+  - name: Sorting API
+    description: Sorting API
+schemes:
+  - http
+paths:
+  /health:
+    get:
+      tags:
+        - Health check
+      summary: Health check API Call
+      description: Health check API call
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success status
+        500:
+          description: Server Error
+  /bubbleSort:
+    post:
+      tags:
+        - Bubble sorting strategy
+      summary: Post array of numbers and rearrange them using bubble sort algorithm
+      description: Post array of numbers and rearrange them using bubble sort algorithm
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Body of the sorting
+          required: true
+          schema:
+            $ref: '#/definitions/input'
+      security:
+        - ApiKeyAuth: []
+      responses:
+        200:
+          description: Success status
+        404:
+          description: Not found
+        500:
+          description: Internal server error
+  /mergeSort:
+    post:
+      tags:
+        - Merge sorting strategy
+      summary: Post array of numbers and rearrange them using merge sort algorithm
+      description: Post array of numbers and rearrange them using merge sort algorithm
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Body of the sorting
+          required: true
+          schema:
+            $ref: '#/definitions/input'
+      security:
+        - ApiKeyAuth: []
+      responses:
+        200:
+          description: Success status
+        404:
+          description: Not found
+        500:
+          description: Internal server error
+definitions:
+  input:
+    type: object
+    properties:
+      unsortedNumbers:
+        type: array
+        items:
+          type: number
+securityDefinitions:
+  ApiKeyAuth:
+    type: apiKey
+    in: header
+    name: X-API-KEY
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
